@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+
+	<!-- appender 决定了日志的输出位置 例如：ConsoleAppender 是将日志输出在控制台上 FileAppender 是将日志输出在文件上 -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
+			by default -->
+
+		<!-- %d 表示显示时间 %thread 表示线程名 %level 日志级别 %logger 输出日志的类 %msg 日志信息 %n 换行 -->
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+		<file>d:/myApp.log</file>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} -
+				%msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="STDOUT_SIMPLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%msg%n</pattern>
+		</encoder>
+	</appender>
+<!-- name="希望日志输出的类名, 或包名" 将希望看的日志级别调低， 把默认的root日志级别调高 -->
+	<logger name="com.xingxue.class11.entity.mapper" level="debug" additivity="false">
+		<appender-ref ref="STDOUT_SIMPLE" />
+	</logger>
+	<logger name="com.xingxue.class11.service" level="debug" additivity="false">
+		<appender-ref ref="STDOUT_SIMPLE" />
+	</logger>
+
+
+	<!-- 控制日志的默认级别 最详细 TRACE < DEBUG < INFO < WARN < ERROR 跟踪 调试 正常信息 警告信息 错误信息 
+		level 决定了哪些日志信息会被显示，只有大于等于此级别的日志才会显示 -->
+	<root level="error">
+		<appender-ref ref="STDOUT" />
+	</root>
+</configuration>
